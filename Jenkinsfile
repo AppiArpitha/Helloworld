@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-               sh 'yum install httpd -y'
+               sh 'mkdir diyan'
             }
         }
     }
