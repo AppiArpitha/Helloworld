@@ -1,0 +1,155 @@
+HU Edge Assignments
+
+Assignment 1: Python/Bash Script Creation
+Objective:
+Develop a script that automates the process of adding a new SSH user with sudo access on an Ubuntu VM using an SSH key. This task requires scripting skills in either Python or Bash, and an understanding of Linux user management and SSH configuration.
+
+Deliverables:
+Script File: A clean, well-commented script file that performs the task as described.
+Screenshot: A screenshot showing successful login as the newly created SSH user.
+
+Instructions:
+Step 1: Environment Setup
+
+-	Ensure you have access to an Ubuntu VM where you can execute administrative commands.
+-	Confirm that Python or Bash is properly installed on the VM, depending on which scripting language you choose.
+
+Step 2: Script Requirements
+-	Language: You may choose either Python or Bash for scripting.
+-	Functions of the Script:
+1.	Check for Root Privileges: Ensure the script is run with root privileges.
+2.	Create a New User: Prompt for the new user’s username.
+3.	Generate SSH Key Pair: If no existing key is specified, generate a new SSH key pair.
+4.	Setup Home Directory and Permissions: Ensure the home directory is created, and proper permissions are set.
+5.	Add to Sudo Group: Add the new user to the sudo group to grant sudo privileges.
+6.	Configure SSH: Place the public key in the correct directory (~/.ssh/authorized_keys) and ensure correct permissions are set on SSH-related directories and files.
+7.	Error Handling: The script should handle possible errors like existing username, permission issues, etc.
+
+Step 3: Security Considerations
+-	Ensure that the script does not expose sensitive data such as SSH keys.
+-	Implement proper error checking and input validation to prevent security vulnerabilities such as injection attacks.
+
+Assignment 2: Provision Infrastructure using Terraform
+Objective:
+Use Infrastructure as Code (IaC) with Terraform to provision a specified set of resources on a cloud platform of your choice (AWS, Azure, or GCP). This assignment will test your ability to use Terraform modules, manage state files securely, and apply best practices in infrastructure provisioning.
+
+Deliverables:
+-	Terraform Scripts: Complete and well-documented Terraform scripts that define the required infrastructure.
+-	Terraform Statefile: Evidence of the remote statefile setup.
+-	Provisioned Infrastructure Screenshots: Screenshots that demonstrate the active resources.
+-	Terraform Apply Logs: Logs that show the terraform apply execution results.
+
+Infrastructure Requirements:
+-	One VPC: A virtual private cloud configured for the created resources.
+-	Two Subnets:
+o	Public Subnet: Accessible from the internet.
+o	Private Subnet: Not directly accessible from the internet.
+-	One Ubuntu Instance: A compute instance running Ubuntu, placed in the public subnet.
+-	One Kubernetes Cluster: A basic cluster setup for orchestrating containerized applications.
+-	One Storage Solution:
+o	AWS: S3 Bucket
+o	Azure: Blob Storage
+o	GCP: Storage Bucket
+-	One MySQL Database Instance (Optional): A relational database service instance.
+
+Technical Specifications:
+1. Terraform Modules:
+Utilize Terraform modules to encapsulate different parts of the infrastructure, such as networking, compute, and storage. 
+2. Remote State Management:
+Configure Terraform to store the state file in a remote backend appropriate to the chosen cloud (e.g., AWS S3, Azure Blob Storage, Google Cloud Storage) to enhance state security and enable team collaboration.
+3. Best Practices:
+-	Security: Manage sensitive values like passwords or access keys using environment variables or secure secrets management tools provided by the cloud provider.
+-	Resource Dependencies: Use explicit dependencies to manage resource creation order where necessary.
+-	Version Pinning: Pin the provider and Terraform versions to ensure consistency and stability of the infrastructure code.
+
+
+Assignment 3: CI/CD Pipeline Development
+Objective:
+Create a Continuous Integration/Continuous Deployment (CI/CD) pipeline using one of the specified tools (Jenkins, GitHub Actions, GitLab CI, AWS CodePipeline, GCP Cloud Build, or Azure Pipeline). The pipeline should automate the deployment of a containerized application to a Kubernetes cluster, ensuring that the application is accessible via a web browser.
+
+Deliverables:
+-	Pipeline Screenshot: A screenshot showing the complete pipeline setup.
+-	Pipeline Output Logs Screenshots: Screenshots of the pipeline execution logs demonstrating each stage.
+-	Deployed Application Screenshots: Screenshots of the application running in the browser.
+-	Kubernetes Manifest Files: All Kubernetes manifest files used in the deployment.
+
+Pipeline Stages:
+-	Checkout Application Code:
+o	Retrieve the latest code from the version control system (e.g., GitHub, GitLab, BitBucket).
+-	Code Analysis using SonarQube:
+o	Analyze the code quality and security vulnerabilities using SonarQube.
+o	(Optional) Fail the build if specified quality thresholds are not met. 
+-	Build Docker Image:
+o	Build a Docker image from the application code.
+o	Tag the image appropriately.
+-	Push into Image Registry:
+o	Push the built Docker image to a specified public or private container image registry (e.g., Docker Hub, AWS ECR, GCP Container Registry).
+-	Deploy into Kubernetes Cluster using ArgoCD:
+o	Use ArgoCD to deploy the Docker image to a Kubernetes cluster.
+o	The deployment should trigger automatically upon a new docker image tag being updated into deployment.yaml file.
+
+Additional Requirements:
+-	Kubernetes Exposition:
+-	Configure Kubernetes services or an Ingress controller to expose the application. Ensure the application is accessible from the browser.
+
+Technical Specifications:
+-	Tools and Technologies:
+o	Choose a CI/CD tool suitable for your infrastructure and familiarity.
+o	Use Docker for containerization.
+o	Kubernetes for orchestration.
+o	ArgoCD for Kubernetes deployment synchronization.
+o	SonarQube for code quality and security analysis.
+
+Assignment 4: Setup Observability for Deployed Infrastructure in the Cloud
+Objective:
+Implement an observability framework for monitoring the deployed infrastructure in a cloud environment using Prometheus and Grafana. This assignment involves configuring these tools to provide insights into the performance and health of both the infrastructure components and the applications running on them.
+
+Deliverables:
+-	Screenshots of Dashboards: Screenshots displaying the configured Prometheus and Grafana dashboards which monitor various metrics.
+-	Alerts Setup Screenshots: Screenshots showing the alert rules configured in Prometheus and any notification channels set up in Grafana.
+-	Documentation: A detailed document explaining how to access logs and metrics, including steps to navigate through the Prometheus and Grafana interfaces.
+
+Steps and Guidelines:
+Step 1: Install and Configure Prometheus
+Installation: Deploy Prometheus on your cloud infrastructure, which could be on a virtual machine, or a container service provided by the cloud.
+	Configuration:
+o	Set up Prometheus to discover and scrape metrics from your cloud resources automatically.
+o	Define the scraping intervals, retention policies, and the target resources.
+Step 2: Install and Configure Grafana
+	Installation: Deploy Grafana to visualize the metrics collected by Prometheus.
+	Configuration:
+o	Connect Grafana to Prometheus as its data source.
+o	Configure dashboards in Grafana to visualize the metrics from Prometheus effectively.
+Step 3: Dashboard Creation
+•	Create detailed Grafana dashboards to monitor:
+o	Cloud resource utilization (CPU, Memory, Storage, Network).
+o	Application-specific metrics (response times, throughput, error rates).
+o	Infrastructure health metrics and performance anomalies.
+Step 4: Alerts Configuration
+	Prometheus Alert Rules:
+o	Implement alert rules in Prometheus for critical metrics that indicate potential issues, such as high CPU or memory usage, slow response times, etc.
+	Grafana Notifications:
+o	Set up notification channels in Grafana (e.g., email, Slack) to alert the team based on the defined Prometheus alert rules. 
+Step 5: Accessing Logs and Metrics
+•	Logs:
+o	If applicable, integrate a centralized logging solution (like ELK Stack or Fluentd) that aggregates logs across the cloud infrastructure.
+o	Provide detailed instructions on how to access and query these logs.
+•	Metrics:
+o	Detail the process for accessing the Prometheus and Grafana interfaces.
+o	Include examples of essential Prometheus queries and key Grafana dashboard panels to monitor.
+
+--------------------------------------------------------------------------------------------------------------
+
+Refences Links:
+-	Resource Link
+-	Udemy Portal: Link
+Refer any topic from above mentioned course link. Login with Deloitte credential.
+
+Notes: 
+•	Use the GCP Cloud Platform for assignments. GCP SandBox
+
+ 
+•	Sample Application for CI/CD Pipeline: Select any sample application to demonstrate the CI/CD pipeline processes and deploy it into a Kubernetes cluster.
+•	Hosting Jenkins: If Jenkins is chosen as the CI/CD tool, it should be hosted on the Ubuntu VM provisioned in Assignment 2.
+•	Application Deployment: Deploy your application into the Kubernetes cluster provisioned in Assignment 2.
+•	Hosting Prometheus and Grafana: Host your Prometheus and Grafana on the Kubernetes cluster or the Ubuntu VM that was provisioned in Assignment 2, as per your architectural preference.
